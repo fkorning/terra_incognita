@@ -1,0 +1,3 @@
+[submodule ".agence"]
+	path = .agence
+	url = git@github.com:l-agence/agence-master.git
