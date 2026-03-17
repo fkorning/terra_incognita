@@ -1,0 +1,44 @@
+i# .gitattribtes
+
+# Autodetect text files
+* text=auto
+
+# Explicitly identify binary files
+*.xls binary
+*.xlsx binary
+*.doc binary
+*.docx binary
+*.vsd binary
+*.vsdx binary
+*.pdf binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.tif binary
+*.webp binary
+
+# Explicitly identify script files
+*.sh text eol=lf
+*.csh text eol=lf
+*.ksh text eol=lf
+*.bsh text eol=lf
+*.bash text eol=lf
+*.tcsh text eol=lf
+*.fish text eol=lf
+*.ps1 text
+*.bat text
+*.cmd text
+bin/* text eol=lf
+bin/*.ps1 text=auto
+bin/*.bat text=auto
+bin/*.cmd text=auto
+
+# Explicitly identify text files
+*.txt text
+*.md text
+*.ini text
+*.json text
+*.yml text
+*.yaml text
+
