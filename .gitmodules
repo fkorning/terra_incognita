@@ -1,3 +1,6 @@
-[submodule ".agence"]
+
+[submodule "agence"]
 	path = .agence
-	url = git@github.com:l-agence/agence-master.git
+	url = git@github.com:l-agence/agence.git
+	branch = main
+
