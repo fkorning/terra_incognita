@@ -58,8 +58,8 @@ public class ModuleController {
                     return ResponseEntity.notFound().build();
                 }
 
-                String url = String.format("/storage/modules/%s/%s/%s/%s/download.zip",
-                    namespace, name, version, system);
+                String url = String.format("/storage/modules/%s/%s/%s/%s/terraform-module-%s_%s_%s.zip",
+                    namespace, name, version, system, name, system, version);
                 return ResponseEntity.ok(Map.of("download_url", url));
             })
             .orElse(ResponseEntity.notFound().build());

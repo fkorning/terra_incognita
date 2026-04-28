@@ -47,7 +47,7 @@ namespace net.terria.registry.terraform
 
             if (!module.versions.ContainsKey(version)) return NotFound();
 
-            var url = $"/storage/modules/{@namespace}/{name}/{version}/{system}/download.zip";
+            var url = $"/storage/modules/{@namespace}/{name}/{version}/{system}/terraform-module-{name}_{system}_{version}.zip";
             return Ok(new { download_url = url });
         }
     }
