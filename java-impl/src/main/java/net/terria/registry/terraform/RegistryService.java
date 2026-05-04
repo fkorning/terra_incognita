@@ -236,7 +236,7 @@ public class RegistryService {
                 try {
                     ModuleVersion moduleVersion = scanModuleVersion(versionPath, versionStr);
                     versions.put(versionStr, moduleVersion);
-                    logger.debug("Discovered module {}/{}/{}/{} with {} platform entries", registry, namespaceName, name, versionStr, moduleVersion.platforms.size());
+                    logger.debug("Discovered module {}/{}/{}/{} with {} system entries", registry, namespaceName, name, versionStr, moduleVersion.systems.size());
                 } catch (IOException ex) {
                     logger.warn("Failed to scan module version {}: {}", versionStr, ex.getMessage());
                 }
@@ -246,8 +246,21 @@ public class RegistryService {
     }
 
     private ModuleVersion scanModuleVersion(Path versionPath, String version) throws IOException {
-        List<Platform> platforms = scanPlatforms(versionPath);
-        return new ModuleVersion(version, platforms);
+        List<String> systems = scanModuleSystems(versionPath);
+        return new ModuleVersion(version, systems);
+    }
+
+    private List<String> scanModuleSystems(Path versionPath) throws IOException {
+        if (!Files.isDirectory(versionPath)) {
+            return List.of();
+        }
+
+        try (var stream = Files.list(versionPath)) {
+            return stream
+                .filter(Files::isDirectory)
+                .map(path -> path.getFileName().toString())
+                .toList();
+        }
     }
 
     /**
@@ -311,11 +324,11 @@ public class RegistryService {
 
     public static class ModuleVersion {
         public final String version;
-        public final List<Platform> platforms;
+        public final List<String> systems;
 
-        public ModuleVersion(String version, List<Platform> platforms) {
+        public ModuleVersion(String version, List<String> systems) {
             this.version = version;
-            this.platforms = platforms;
+            this.systems = systems;
         }
     }
 

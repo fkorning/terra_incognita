@@ -32,9 +32,7 @@ public class ModuleController {
                 List<Map<String, Object>> versions = index.versions.entrySet().stream()
                     .map(entry -> Map.of(
                         "version", entry.getKey(),
-                        "platforms", entry.getValue().platforms.stream()
-                            .map(p -> Map.of("os", p.os, "arch", p.arch))
-                            .collect(Collectors.toList())
+                        "systems", entry.getValue().systems
                     ))
                     .collect(Collectors.toList());
 

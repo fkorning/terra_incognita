@@ -6,9 +6,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dotnet-impl", "dotnet-impl"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dotnet-test", "dotnet-test", "{269C6E1B-52C9-D70F-49D3-53F5F8BB4298}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RegistryApplication", "dotnet-impl\RegistryApplication.csproj", "{2BA6A667-BEB4-8B59-3EB6-92525A4A8671}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RegistryApplication", "dotnet-impl\main\RegistryApplication.csproj", "{2BA6A667-BEB4-8B59-3EB6-92525A4A8671}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RegistryApplication.Test", "dotnet-test\RegistryApplication.Test.csproj", "{B6CD7CF7-6124-5EB8-3C94-CCC20282114E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RegistryApplication.Test", "dotnet-impl\test\RegistryApplication.Test.csproj", "{B6CD7CF7-6124-5EB8-3C94-CCC20282114E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

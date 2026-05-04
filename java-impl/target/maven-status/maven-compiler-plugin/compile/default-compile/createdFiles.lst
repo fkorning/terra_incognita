@@ -1,1 +1,9 @@
+net\terria\registry\terraform\RegistryService$ModuleVersion.class
+net\terria\registry\terraform\RegistryService.class
+net\terria\registry\terraform\RegistryService$ProviderIndex.class
+net\terria\registry\terraform\RegistryService$Platform.class
+net\terria\registry\terraform\ProviderController.class
+net\terria\registry\terraform\RegistryConfig.class
 net\terria\registry\terraform\RegistryApplication.class
+net\terria\registry\terraform\ModuleController.class
+net\terria\registry\terraform\RegistryService$ModuleIndex.class
