@@ -17,6 +17,22 @@ namespace net.terria.registry.terraform
         private readonly Dictionary<string, ModuleIndex> _modules = new();
         private readonly string _storagePath = string.Empty;
 
+
+        // utility methods
+
+        // create POSIX symbolic link
+        public static FileSystemInfo createLink (string path, string target)
+        {
+            try {
+                return System.IO.File.CreateSymbolicLink (path, target );
+            }
+            catch (Exception ex) {
+                throw new IOException("Failed to create symbolic link", ex);
+            }
+        }
+
+
+
         public RegistryService(ILogger<RegistryService> logger, IConfiguration config)
         {
             _logger = logger;
