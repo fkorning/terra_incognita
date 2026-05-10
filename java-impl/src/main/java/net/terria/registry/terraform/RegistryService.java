@@ -24,6 +24,25 @@ public class RegistryService {
 
     private static final Logger logger = LoggerFactory.getLogger(RegistryService.class);
 
+    
+        // utility methods
+
+        // create POSIX symbolic link
+        public static Path createLink (String path, String target) throws IOException
+        {
+            try {
+                return Files.createLink(Path.of(path), Path.of(target));
+            }
+            catch (IOException e) {
+                throw new IOException("Failed to create symbolic link", e);
+            }            
+        }
+
+
+
+    
+
+
     /**
      * Root path where on-disk registry storage is mounted.
      * Can be configured through application properties.
