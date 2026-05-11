@@ -29,8 +29,8 @@ namespace net.terria.registry.terraform
                 storagePath = Path.GetFullPath(storagePath, app.Environment.ContentRootPath);
             }
             
-            var providersPath = Path.Combine(storagePath, "registry.terraform.io", "providers");
-            var modulesPath = Path.Combine(storagePath, "registry.terraform.io", "modules");
+            var providersPath = Path.Combine(storagePath, "terraform", "providers");
+            var modulesPath = Path.Combine(storagePath, "terraform", "modules");
 
             if (Directory.Exists(providersPath))
             {

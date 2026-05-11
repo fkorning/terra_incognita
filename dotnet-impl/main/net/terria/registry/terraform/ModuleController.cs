@@ -7,7 +7,7 @@ namespace net.terria.registry.terraform
     public class ModuleController : ControllerBase
     {
         private readonly RegistryService _registryService;
-        private const string DefaultRegistry = "registry.terraform.io";
+        private const string DefaultRegistry = "terraform";
 
         public ModuleController(RegistryService registryService)
         {

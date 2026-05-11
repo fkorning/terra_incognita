@@ -47,14 +47,14 @@ namespace net.terria.registry.terraform
         /// </summary>
         private void Init()
         {
-            var root = Path.Combine(_storagePath, "registry.terraform.io");
+            var root = Path.Combine(_storagePath, "terraform");
             if (!Directory.Exists(root))
             {
                 _logger.LogWarning("Registry storage path does not exist: {Path}", root);
                 return;
             }
 
-            const string registry = "registry.terraform.io";
+            const string registry = "terraform";
             ScanProviders(Path.Combine(root, "providers"), registry);
             ScanModules(Path.Combine(root, "modules"), registry);
 
@@ -62,10 +62,10 @@ namespace net.terria.registry.terraform
         }
 
         /// <summary>
-        /// Scan the top-level providers path (e.g. <c>registry.terraform.io/providers</c>) and index provider namespaces.
+        /// Scan the top-level providers path (e.g. <c>terraform/providers</c>) and index provider namespaces.
         /// </summary>
         /// <param name="providersPath">Filesystem path for provider namespace roots.</param>
-        /// <param name="registry">Registry ID (e.g. registry.terraform.io)</param>
+        /// <param name="registry">Registry ID (e.g. terraform)</param>
         private void ScanProviders(string providersPath, string registry)
         {
             if (!Directory.Exists(providersPath)) return;
@@ -78,7 +78,7 @@ namespace net.terria.registry.terraform
         }
 
         /// <summary>
-        /// Scan a provider registry root path (e.g. <c>registry.terraform.io</c>) and process namespaces.
+        /// Scan a provider registry root path (e.g. <c>terraform</c>) and process namespaces.
         /// </summary>
         /// <param name="registryPath">Registry directory on disk</param>
         /// <param name="registry">Registry ID</param>
@@ -161,10 +161,10 @@ namespace net.terria.registry.terraform
         }
 
         /// <summary>
-        /// Scan the top-level modules path (e.g. <c>registry.terraform.io/modules</c>) and index module namespaces.
+        /// Scan the top-level modules path (e.g. <c>terraform/modules</c>) and index module namespaces.
         /// </summary>
         /// <param name="modulesPath">Filesystem path for module namespace roots</param>
-        /// <param name="registry">Registry ID (e.g. registry.terraform.io)</param>
+        /// <param name="registry">Registry ID (e.g. terraform)</param>
         private void ScanModules(string modulesPath, string registry)
         {
             if (!Directory.Exists(modulesPath)) return;

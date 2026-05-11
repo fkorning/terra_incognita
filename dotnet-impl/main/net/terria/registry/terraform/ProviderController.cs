@@ -7,7 +7,7 @@ namespace net.terria.registry.terraform
     public class ProviderController : ControllerBase
     {
         private readonly RegistryService _registryService;
-        private const string DefaultRegistry = "registry.terraform.io";
+        private const string DefaultRegistry = "terraform";
 
         public ProviderController(RegistryService registryService)
         {

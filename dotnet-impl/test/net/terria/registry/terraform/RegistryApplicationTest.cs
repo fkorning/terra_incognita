@@ -10,6 +10,13 @@ namespace net.terria.registry.terraform
     [TestFixture]
     public class RegistryApplicationTest
     {
+
+        private static string REGISTRY_STORAGE_PATH = "../../../../registry/";
+        
+
+        private String _registry_storage = REGISTRY_STORAGE_PATH;
+
+
         private WebApplicationFactory<RegistryApplication> _factory;
 
         [SetUp]
@@ -22,16 +29,20 @@ namespace net.terria.registry.terraform
                     {
                         config.AddInMemoryCollection(new Dictionary<string, string>
                         {
-                            ["Registry:StoragePath"] = Path.Combine(Directory.GetCurrentDirectory(), "..", "..", "..", "..", "registry")
+                            ["Registry:StoragePath"] = Path.GetFullPath(_registry_storage)
                         });
                     });
                 });
+
+            Console.Out.WriteLine("Registry Storage Root: " + Path.GetFullPath(_registry_storage));                
         }
 
         [TearDown]
         public void TearDown()
         {
             _factory.Dispose();
+
+            
         }
 
         [Test]
@@ -39,7 +50,7 @@ namespace net.terria.registry.terraform
         {
             var client = _factory.CreateClient();
 
-            var response = await client.GetAsync("/providers/registry.terraform.io/hashicorp/aws/versions");
+            var response = await client.GetAsync("/providers/terraform/hashicorp/aws/versions");
 
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.NotFound));
         }
@@ -49,7 +60,7 @@ namespace net.terria.registry.terraform
         {
             var client = _factory.CreateClient();
 
-            var response = await client.GetAsync("/modules/registry.terraform.io/hashicorp/vpc/aws/versions");
+            var response = await client.GetAsync("/modules/terraform/hashicorp/vpc/aws/versions");
 
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.NotFound));
         }
