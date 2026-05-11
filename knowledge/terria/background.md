@@ -1,5 +1,5 @@
 
-# outline
+# Outline
 
 
 we want to code a generic terraform registry in both java and dotnet.
@@ -38,23 +38,28 @@ see https://developer.hashicorp.com/terraform/internals/module-registry-protocol
 ```
 registry/
 │
-├── terraform@ -> registry.terraform.io/                    
+├── index.html                                              # render registries.json
+├── registries.json                                         # dynamically scanned
+│
+├── registry.terraform.io@ ->  terraform/                    
 ├── terraform/                                              # {terraform registry}
-│   │       
+│   │  
 │   ├── providers@ -> plugins/
 │   ├── plugins/
 │   │       
+│   ├── libraries@ -> modules/
 │   └── modules/
+│
 │       
 ├── registry.k8s.io@ -> kubernetes/
-├── kubernetes/                                             # {kubernetes registry}
+├── kubernetes/                                             # {future kubernetes registry}
 │   │       
 │   ├── plugins/
 │   │       
 │   └── charts/
 │       
-├── docker@ -> registry.hub.docker.com/                    
-└── registry.hub.docker.com/                                # {docker registry}
+├── registry.hub.docker.com@ -> docker/                    
+└── registry.hub.docker.com/                                # {future docker registry}
     │   
     ├── manifests/
     │       
@@ -62,17 +67,17 @@ registry/
 ```
 
 
-# detailed terraform registry structure 
+# Detailed Terraform Registry structure 
 
 
 ```text
 registry/
 │
-├── terraform@ -> registry.terraform.io/                    
-├── registry.terraform.io/                                  # {registry}
+├── registry.terraform.io@ ->  terraform/                    
+├── terraform/                                              # {terraform registry}
 │   │       
-│   ├── providers -> plugins@/
-│   ├── plugins/
+│   ├── plugins@ -> providers/
+│   ├── providers/
 │   │   ├── namespaces.json   
 │   │   │
 │   │   ├── hashicorp/                                      # {namespace}
@@ -316,11 +321,11 @@ registry/
 │
 │
 │ 
-├── kubernetes@ -> registry.k8s.io/
-├── registry.k8s.io/                                      # {registry}
+├── registry.k8s.io@ -> kubernete/
+├── kubernetes/                                           # {future kubernetes registry}
 │
-├── docker@ -> registry.hub.docker.com//                    
-└── registry.hub.docker.com/                              # {registry}
+├── registry.hub.docker.com@ -> docker/                    
+└── docker/                                               # {future docker registry}
 
 ```                    
 

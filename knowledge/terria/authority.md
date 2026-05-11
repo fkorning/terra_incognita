@@ -17,16 +17,19 @@
 - **Extensibility**: Structure enables adding kubernetes, docker, and other registry types
 
 ### Symlink Strategy for Compatibility
-- Actual folder: `registry/registry.terraform.io/plugins/` (generic, extensible naming)
+- Actual folder: `registry//terraform/plugins/` (generic, extensible naming)
 - Symlink: `providers@ -> plugins/` (protocol compatibility)
 - Benefit: No code changes needed, all existing `/providers/` endpoints continue to work
 
 ### Folder Organization
 ```
-registry.terraform.io/
-├── modules/           # Terraform modules
-├── plugins/           # Actual implementation (generic naming)
-└── providers@ -> plugins/  # Symlink for protocol compatibility
+registry/
+├──registry.terraform.io@ -> terraform/     # symlink 
+└──terraform/                               # terraform registry 
+    ├── modules/                            # Terraform modules
+    ├── providers/                          # Terraform providers
+    ├── libraries@ -> modules/              # symlink
+    └── plugins@ -> providers/              # symlink   
 ```
 
 ## Review & Approval Process

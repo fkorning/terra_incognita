@@ -2,20 +2,40 @@
 
 ## Java implementation
 
-- `RegistryService` scans a configured storage root and expects the Terraform registry under `registry.terraform.io`.
-- The service reads provider/plugin metadata from `registry.terraform.io/plugins/...`.
-- Modules are discovered from `registry.terraform.io/modules/...`.
-- A symlink `registry.terraform.io/providers` points to `plugins` so Terraform protocol paths remain compatible.
 - A Spring `StaticResourceConfig` serves download paths from the storage folder.
-- Tests in `java-impl` use temporary registry storage and verify that provider indexes are built from the new layout.
+- A configured multi-registry storage root in the local filesystem (default path is `registry/`).
+- A configured symlink maps `/terraform/registry.terraform.io` points to a subfolder `/terraform/`.
+- The Terraform `RegistryService` expects terraform registry storage in the `/terraform/` subfolder.
+
+- Terraform Providers are discovered from `/terraform/plugins/...`.
+- Terraform Modules are discovered from `/terraform/modules/...`.
+- A symlink `terraforn/providers` points to `plugins` so Terraform protocol paths remain compatible.
+
+- API paths map `/v1/providers/...` -> `/terraform/providers/...`.
+- API paths map `/v1/modules/...` -> `/terraform/modules/...`.
+
+- A symlink `terraforn/providers` points to `plugins` so Terraform protocol paths remain compatible.
+- Download URLs continue to reference `/terraform/providers/...`.
+
+- Tests in `java-impl` use local registry storage and verify that provider indexes are built from the new layout.
 
 ## .NET implementation
 
-- `RegistryService` reads the configured `Registry:StoragePath` and looks under `registry.terraform.io`.
-- Provider/plugin scanning targets `registry.terraform.io/plugins/...` and module scanning targets `registry.terraform.io/modules/...`.
-- The service keeps `/v1/providers/...` and `/v1/modules/...` endpoints unchanged.
-- Download URLs continue to reference `/storage/providers/...`.
-- Tests in `dotnet-test` now construct provider data under `registry.terraform.io/providers/...` to match the implemented storage layout.
+- A configured multi-registry storage root in the local filesystem (default path is `registry/`).
+- A configured symlink maps to `registry/registry.terraform.io/` -> `registry/terraform/`.
+- The Terraform `RegistryService` expects terraform registry storage in the `/terraform/` subfolder.
+
+- Terraform Providers are discovered from `/terraform/plugins/...`.
+- Terraform Modules are discovered from `/terraform/modules/...`.
+
+- API paths map `/v1/providers/...` -> `/terraform/providers/...`.
+- API paths map `/v1/modules/...` -> `/terraform/modules/...`.
+
+- A symlink `terraforn/providers` points to `plugins` so Terraform protocol paths remain compatible.
+- Download URLs continue to reference `/terraform/providers/...`.
+
+- Tests in `dotnet-impl/test` use local registry storage and verify that provider indexes are built from the new layout.
+
 
 ## Notes
 

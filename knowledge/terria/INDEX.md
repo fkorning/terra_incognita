@@ -57,6 +57,10 @@ https://stevelasker.blog/2020/02/17/registry-namespace-repo-names/
 https://forums.docker.com/t/docker-private-registry-how-to-list-all-images/21136
 
 
+# docker conatienr images
+https://labs.iximiuz.com/tutorials/container-image-from-scratch
+
+
 # kubernetes registries
 
 https://github.com/kubernetes/registry.k8s.io
