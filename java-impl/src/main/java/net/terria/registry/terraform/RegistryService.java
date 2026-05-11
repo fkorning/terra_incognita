@@ -73,7 +73,7 @@ public class RegistryService {
         }
 
         // Scan the terraform registry structure
-        Path terraformRegistry = root.resolve("registry.terraform.io");
+        Path terraformRegistry = root.resolve("terraform");
         if (Files.exists(terraformRegistry)) {
             scanTerraformRegistry(terraformRegistry);
         }
@@ -85,15 +85,15 @@ public class RegistryService {
      * Scan a specific terraform registry directory structure.
      */
     private void scanTerraformRegistry(Path registryPath) throws IOException {
-        String registry = "registry.terraform.io";
+        String registry = "terraform";
 
-        // Scan providers under registry.terraform.io/providers/
+        // Scan providers under terraform/providers/
         Path providersPath = registryPath.resolve("providers");
         if (Files.exists(providersPath)) {
             scanRegistryProviders(providersPath, registry);
         }
 
-        // Scan modules under registry.terraform.io/modules/
+        // Scan modules under terraform/modules/
         Path modulesPath = registryPath.resolve("modules");
         if (Files.exists(modulesPath)) {
             scanRegistryModules(modulesPath, registry);
@@ -106,7 +106,7 @@ public class RegistryService {
     private void scanProviders(Path providersPath) throws IOException {
         if (!Files.exists(providersPath)) return;
 
-        // Top-level under providers: registry namespaces like registry.terraform.io
+        // Top-level under providers: registry namespaces like terraform
         Files.walk(providersPath, 1)
             .filter(Files::isDirectory)
             .filter(p -> !p.equals(providersPath))

@@ -47,6 +47,12 @@
         <scope>test</scope>
     </dependency>
 
+    <dependency>
+        <groupId>commons-io</groupId>
+        <artifactId>commons-io</artifactId>
+        <version>2.11.0</version>
+    </dependency>
+
         <!--
         <dependency>
             <groupId>org.jsoup</groupId>
@@ -60,7 +66,9 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
-                <version>3.3.1</version>
+                <!-- v2.7 handles symlinks, version 3.x does not -->
+                <!--<version>3.3.1</version>-->
+                <version>2.7</version>
                 <executions>
                     <execution>
                         <id>copy-test-resources</id>
@@ -81,7 +89,7 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>
+            </plugin>            
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
@@ -107,8 +115,8 @@
                 <artifactId>tomcat-maven-plugin</artifactId>
                 <version>2.2</version> 
                 <configuration>
-                    <port>5000</port>
-                        <path>/</path>
+                    <port>8080</port>
+                    <path>/</path>
                 </configuration>                               
             </plugin>
 

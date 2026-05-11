@@ -17,10 +17,10 @@ public class RegistryConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         // Serve provider downloads from registry storage
         registry.addResourceHandler("/storage/providers/**")
-                .addResourceLocations("file:" + Paths.get(storagePath, "registry.terraform.io", "providers").toString() + "/");
+                .addResourceLocations("file:" + Paths.get(storagePath, "terraform", "providers").toString() + "/");
 
         // Serve module downloads from registry storage
         registry.addResourceHandler("/storage/modules/**")
-                .addResourceLocations("file:" + Paths.get(storagePath, "registry.terraform.io", "modules").toString() + "/");
+                .addResourceLocations("file:" + Paths.get(storagePath, "terraform", "modules").toString() + "/");
     }
 }

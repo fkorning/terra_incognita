@@ -18,7 +18,7 @@ public class ModuleController {
     @Autowired
     private RegistryService registryService;
     
-    private static final String DEFAULT_REGISTRY = "registry.terraform.io";
+    private static final String DEFAULT_REGISTRY = "terraform";
 
     /**
      * Terraform Registry Protocol: GET /v1/modules/{namespace}/{name}/versions
@@ -56,7 +56,7 @@ public class ModuleController {
                     return ResponseEntity.notFound().build();
                 }
 
-                String url = String.format("/storage/modules/%s/%s/%s/%s/terraform-module-%s_%s_%s.zip",
+                String url = String.format("/terraform/modules/%s/%s/%s/%s/terraform-module-%s_%s_%s.zip",
                     namespace, name, version, system, name, system, version);
                 return ResponseEntity.ok(Map.of("download_url", url));
             })

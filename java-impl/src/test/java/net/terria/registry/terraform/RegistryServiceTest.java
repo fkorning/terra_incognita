@@ -15,7 +15,7 @@ import org.springframework.test.context.DynamicPropertySource;
 @SpringBootTest
 public class RegistryServiceTest {
 
-    private static final Path REGISTRY_STORAGE_PATH = Path.of("registry/");
+    private static final Path REGISTRY_STORAGE_PATH = Path.of("../registry/");
 
     @Autowired
     private RegistryService registryService;
@@ -24,11 +24,24 @@ public class RegistryServiceTest {
     static void dynamicProperties(DynamicPropertyRegistry registry) {
         registry.add("registry.storage.path", () -> REGISTRY_STORAGE_PATH.toString());
     }
+    
+    public static void setup() {
+
+        System.out.println("Registry Storage Root: " + REGISTRY_STORAGE_PATH.toString());
+
+        // Ensure registry storage directory exists before tests
+        try {
+            Files.createDirectories(REGISTRY_STORAGE_PATH);
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to create registry storage directory", e);
+        }
+    }
+
 
     @BeforeEach
     public void initStorage() throws IOException {
 
-        Path registryPath = REGISTRY_STORAGE_PATH.resolve("registry.terraform.io");
+        Path registryPath = REGISTRY_STORAGE_PATH.resolve("terraform");
         Path providersPath = registryPath.resolve("providers");
         Path modulesPath = registryPath.resolve("modules");
 
@@ -42,8 +55,8 @@ public class RegistryServiceTest {
 
     @Test
     public void testInitWithProvider() throws IOException {
-        // Create provider structure under registry.terraform.io/providers/
-        Path registryPath = REGISTRY_STORAGE_PATH.resolve("registry.terraform.io");
+        // Create provider structure under terraform/providers/
+        Path registryPath = REGISTRY_STORAGE_PATH.resolve("terraform");
         Path providersPath = registryPath.resolve("providers");
         Path namespacePath = providersPath.resolve("hashicorp");
         Path providerPath = namespacePath.resolve("aws");
@@ -57,7 +70,7 @@ public class RegistryServiceTest {
         registryService.init();
 
         assertThat(registryService.getProviders()).hasSize(1);
-        assertThat(registryService.getProvider("registry.terraform.io", "hashicorp", "aws")).isPresent();
+        assertThat(registryService.getProvider("terraform", "hashicorp", "aws")).isPresent();
     }
 
 

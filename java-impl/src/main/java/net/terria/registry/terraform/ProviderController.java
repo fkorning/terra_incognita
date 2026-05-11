@@ -18,7 +18,7 @@ public class ProviderController {
     @Autowired
     private RegistryService registryService;
     
-    private static final String DEFAULT_REGISTRY = "registry.terraform.io";
+    private static final String DEFAULT_REGISTRY = "terraform";
 
     /**
      * Get provider versions endpoint.
